@@ -4,77 +4,74 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.andengine.entity.primitive.Line;
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.text.Text;
+import org.andengine.entity.text.TextOptions;
+import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.util.HorizontalAlign;
 import org.andengine.util.color.Color;
 
+import android.provider.CalendarContract.Colors;
+
 public class Chamber {
-	public int CELL_WIDTH = 30;
+	public int CELL_WIDTH = 45;
 	public int CHAMBER_WIDTH = 10;
 	public int CHAMBER_HEIGHT = 10;
-	public int LEFT = 50;
-	public int TOP = 50;
+	public int LEFT = 10;
+	public int TOP = 10;
 	
-	public Chamber () {
+	private MainActivity mActivity;
+	
+	private Cell[][] mCells;
+	
+	public Chamber (MainActivity activity) {
+		mActivity = activity;
+		mCells = createCells();
 		
+		//recursiveSplit(mCells);
 	}
 	
-	private void split(Scene scene, VertexBufferObjectManager vbom) {
-		split(0, 0, CHAMBER_WIDTH, CHAMBER_HEIGHT, scene, vbom, false);
+	private void recursiveSplit(Cell[][] mCells) {
+		recursiveSplit(mCells, 0, 0, CHAMBER_WIDTH - 1, CHAMBER_HEIGHT - 1, false);
 	}
-	private void split(int x1, int y1, int x2, int y2, Scene scene, VertexBufferObjectManager vbom, boolean last) {
-		/*
-		 * Tänker mig ett rutnät med storleken CHAMBER_WIDTH * CHAMBER_HEIGHT
-		 * Splitta varje fyrkant i fyra nya fyrkanter med slumpmässig position i höjd/bredd.
-		 */
-		
-		if ((x2 - x1) < 2) {
-			return;
-		}
-		if ((y2 - y1) < 2) {
-			return;
-		}
+	private void recursiveSplit(Cell[][] mCells, int x1, int y1, int x2, int y2, boolean last) {
+		// halvera två gånger
 		int x_split = -1;
-		while (x_split == x1 || x_split == x2 || x_split == -1)
-			x_split = randBetween(x1, x2);
 		int y_split = -1;
-		while (y_split == y1 || y_split == y2 || y_split == -1)
-			y_split = randBetween(y1, y2);
 		
-		ArrayList<Line> lines = new ArrayList<Line>();
-		Color color = last ? Color.RED : Color.GREEN;
-		lines.add(createLine(
-				LEFT + x_split * CELL_WIDTH,
-				TOP + y1 * CELL_WIDTH,
-				LEFT + x_split * CELL_WIDTH,
-				TOP + y2 * CELL_WIDTH,
-				vbom,
-				color
-			));
+		int xLength = x2 - x1;
+		int yLength = y2 - y1;
 		
-		lines.add(createLine(
-				LEFT + x1 * CELL_WIDTH,
-				TOP + y_split * CELL_WIDTH,
-				LEFT + x2 * CELL_WIDTH,
-				TOP + y_split * CELL_WIDTH,
-				vbom,
-				color
-			));
-		
-		// splitta alla fyra fyrkanter
-		
-		for (Line line : lines) {
-			scene.attachChild(line);
+		if (xLength < 1) {
+			return; // avbryt rekursionen
 		}
 		
-		if (last) {
+		if (yLength <= 1) {
+			return; // avbryt rekursionen
+		}
+		//x_split = randBetween(x1, x2 - 1);
+		//y_split = randBetween(y1, y2 - 1);
+		x_split = x2 - 1;
+		y_split = y2 - 1;
+		
+		// Gå igenom x-kolumnen
+		for (int y = y1; y <= y2; y++) {
+			mCells[x_split][y].openRight = false;
+			mCells[x_split][y].color = Color.BLUE;
+		}
+		
+		// Gå igenom y-raden
+		for (int x = x1; x <= x2; x++) {
+			mCells[x][y_split].openBottom = false;
+			mCells[x][y_split].color = Color.YELLOW;
+		}
+		
+		if (last)
 			return;
-		}
 		
-		split(x1, y1, x_split, y_split, scene, vbom, false);
-		split(x1, y_split, x_split, y2, scene, vbom, false);
-		split(x_split, y1, x2, y_split, scene, vbom, false);
-		split(x_split, y_split, x2, y2, scene, vbom, false);
+		recursiveSplit(mCells, 0, 0, x_split, y_split, false);
 	}
 	
 	private int randBetween (int min, int max) {
@@ -83,53 +80,101 @@ public class Chamber {
 		
 		return r.nextInt(max - min) + min;
 	}
-	
-	public void Draw (Scene scene, VertexBufferObjectManager vbom) {
-		// skapa fyra linjer (kammaren)
+
+	public Cell[][] createCells() {
+		Cell[][] ret = new Cell[CHAMBER_WIDTH][CHAMBER_HEIGHT];
 		
-		ArrayList<Line> lines = new ArrayList<Line>();
-		
-		// top
-		lines.add(createLine(
-				LEFT,
-				TOP,
-				LEFT + CHAMBER_WIDTH * CELL_WIDTH,
-				TOP,
-				vbom
-			));
-		
-		// bottom
-		lines.add(createLine(
-				LEFT,
-				TOP + CHAMBER_HEIGHT * CELL_WIDTH,
-				LEFT + CHAMBER_WIDTH * CELL_WIDTH,
-				TOP + CHAMBER_HEIGHT * CELL_WIDTH,
-				vbom
-			));
-		
-		// left
-		lines.add(createLine(
-				LEFT,
-				TOP,
-				LEFT,
-				TOP + CHAMBER_HEIGHT * CELL_WIDTH,
-				vbom
-			));
-		
-		// right
-		lines.add(createLine(
-				LEFT + CHAMBER_WIDTH * CELL_WIDTH,
-				TOP,
-				LEFT + CHAMBER_WIDTH * CELL_WIDTH,
-				TOP + CHAMBER_HEIGHT * CELL_WIDTH,
-				vbom
-			));
-		
-		for (Line line : lines) {
-			scene.attachChild(line);
+		for (int x = 0; x < CHAMBER_WIDTH; x++) {
+			for (int y = 0; y < CHAMBER_HEIGHT; y++) {
+				ret[x][y] = new Cell();
+				
+				// öppna kanterna runt om
+				ret[x][y].openLeft = !(x == 0);
+				ret[x][y].openRight = !(x == (CHAMBER_WIDTH - 1));
+				ret[x][y].openTop = !(y == 0);
+				ret[x][y].openBottom = !(y == (CHAMBER_HEIGHT - 1));
+			}
 		}
 		
-		split(scene, vbom);
+		return ret;
+	}
+	
+	public void Draw(Scene scene, VertexBufferObjectManager vbom) {
+		for (int x = 0; x < mCells.length; x++) {
+			for (int y = 0; y < mCells[x].length; y++) {
+				Cell cell = mCells[x][y];
+				
+				Line topLine = createLine(
+						LEFT + x * CELL_WIDTH,
+						TOP + y * CELL_WIDTH,
+						LEFT + (x + 1) * CELL_WIDTH,
+						TOP + y  * CELL_WIDTH,
+						vbom,
+						Color.RED
+					);
+				
+				Line leftLine = createLine(
+						LEFT + x * CELL_WIDTH,
+						TOP + y * CELL_WIDTH,
+						LEFT + x * CELL_WIDTH,
+						TOP + (y + 1)  * CELL_WIDTH,
+						vbom,
+						Color.RED
+					);
+				
+				Line rightLine = createLine(
+						LEFT + (x + 1) * CELL_WIDTH,
+						TOP + y * CELL_WIDTH,
+						LEFT + (x + 1) * CELL_WIDTH,
+						TOP + (y + 1)  * CELL_WIDTH,
+						vbom,
+						Color.RED
+					);
+				
+				Line bottomLine = createLine(
+						LEFT + x * CELL_WIDTH,
+						TOP + (y + 1) * CELL_WIDTH,
+						LEFT + (x + 1) * CELL_WIDTH,
+						TOP + (y + 1)  * CELL_WIDTH,
+						vbom,
+						Color.RED
+					);
+				
+				int padding = 1;
+				Rectangle rect = new Rectangle(
+						LEFT + x * CELL_WIDTH + padding,
+						TOP + y * CELL_WIDTH + padding,
+						CELL_WIDTH - padding,
+						CELL_WIDTH - padding,
+						vbom);
+				final Text centerText = new Text(
+						(int)(LEFT + (x) * CELL_WIDTH) + 2,
+						(int)(TOP + (y) * CELL_WIDTH) + 2,
+						mActivity.mFont,
+						Integer.toString(x) + "," + Integer.toString(y),
+						new TextOptions(HorizontalAlign.CENTER), 
+						vbom);
+				centerText.setColor(new Color(0.6f, 0.6f, 0.6f));
+								
+				rect.setColor(cell.color);
+				scene.attachChild(rect);
+				
+				scene.attachChild(centerText);
+
+				
+				if (!cell.openTop)
+					scene.attachChild(topLine);
+				
+				if (!cell.openBottom)
+					scene.attachChild(bottomLine);
+				
+				if (!cell.openLeft)
+					scene.attachChild(leftLine);
+				
+				if (!cell.openRight)
+					scene.attachChild(rightLine);
+			}
+		}
 	}
 	
 	public Line createLine(int x1, int y1, int x2, int y2, VertexBufferObjectManager vbom) {
@@ -141,11 +186,13 @@ public class Chamber {
 				y1, 	// y1
 				x2, 	// x2
 				y2, 	// y2
-				1, 		// line width
+				3, 		// line width
 				vbom	// vertex buffer object manager
 			);
+		
 		line.setColor(color);
 		
 		return line;
+		
 	}
 }
