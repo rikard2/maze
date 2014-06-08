@@ -37,7 +37,7 @@ public class Chamber {
 		recursiveSplit(mCells, 0, 0, CHAMBER_WIDTH - 1, CHAMBER_HEIGHT - 1, false);
 	}
 	private void recursiveSplit(Cell[][] mCells, int x1, int y1, int x2, int y2, boolean last) {
-		// halvera tvŒ gŒnger
+		// halvera tvï¿½ gï¿½nger
 		int x_split = -1;
 		int y_split = -1;
 		
@@ -56,13 +56,13 @@ public class Chamber {
 		x_split = x2 - 1;
 		y_split = y2 - 1;
 		
-		// GŒ igenom x-kolumnen
+		// Gï¿½ igenom x-kolumnen
 		for (int y = y1; y <= y2; y++) {
 			mCells[x_split][y].openRight = false;
 			mCells[x_split][y].color = Color.BLUE;
 		}
 		
-		// GŒ igenom y-raden
+		// Gï¿½ igenom y-raden
 		for (int x = x1; x <= x2; x++) {
 			mCells[x][y_split].openBottom = false;
 			mCells[x][y_split].color = Color.YELLOW;
@@ -86,9 +86,9 @@ public class Chamber {
 		
 		for (int x = 0; x < CHAMBER_WIDTH; x++) {
 			for (int y = 0; y < CHAMBER_HEIGHT; y++) {
-				ret[x][y] = new Cell();
+				ret[x][y] = new Cell(x, y);
 				
-				// šppna kanterna runt om
+				// ï¿½ppna kanterna runt om
 				ret[x][y].openLeft = !(x == 0);
 				ret[x][y].openRight = !(x == (CHAMBER_WIDTH - 1));
 				ret[x][y].openTop = !(y == 0);
