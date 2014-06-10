@@ -3,6 +3,7 @@ package com.boss.maze.test;
 import org.andengine.util.color.Color;
 
 import com.boss.maze.Cell;
+import com.boss.maze.Direction;
 
 import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
@@ -62,13 +63,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourNW() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertFalse(nw.isNeighbour(nw));
 		assertTrue(nw.isNeighbour(n));
@@ -84,13 +85,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourN() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertTrue(n.isNeighbour(nw));
 		assertFalse(n.isNeighbour(n));
@@ -106,13 +107,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourNE() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertFalse(ne.isNeighbour(nw));
 		assertTrue(ne.isNeighbour(n));
@@ -128,13 +129,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourE() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertFalse(e.isNeighbour(nw));
 		assertFalse(e.isNeighbour(n));
@@ -150,13 +151,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourSE() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertFalse(se.isNeighbour(nw));
 		assertFalse(se.isNeighbour(n));
@@ -172,13 +173,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourS() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertFalse(s.isNeighbour(nw));
 		assertFalse(s.isNeighbour(n));
@@ -194,13 +195,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourSW() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertFalse(sw.isNeighbour(nw));
 		assertFalse(sw.isNeighbour(n));
@@ -216,13 +217,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourW() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertTrue(w.isNeighbour(nw));
 		assertFalse(w.isNeighbour(n));
@@ -238,13 +239,13 @@ public class CellTest extends TestCase {
 	@SmallTest
 	public void testIsNeighbourMiddle() {
 		Cell nw = new Cell(0, 0);
-		Cell n = new Cell(0, 1);
-		Cell ne = new Cell(0, 2);
-		Cell e = new Cell(1, 2);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
 		Cell se = new Cell(2, 2);
-		Cell s = new Cell(2, 1);
-		Cell sw = new Cell(2, 0);
-		Cell w = new Cell(1, 0);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
 		Cell middle = new Cell(1, 1);
 		assertFalse(middle.isNeighbour(nw));
 		assertTrue(middle.isNeighbour(n));
@@ -255,6 +256,204 @@ public class CellTest extends TestCase {
 		assertFalse(middle.isNeighbour(sw));
 		assertTrue(middle.isNeighbour(w));
 		assertFalse(middle.isNeighbour(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToNW() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.UNDEFINED, nw.getDirectionTo(nw));
+		assertEquals(Direction.EAST, nw.getDirectionTo(n));
+		assertEquals(Direction.UNDEFINED, nw.getDirectionTo(ne));
+		assertEquals(Direction.UNDEFINED, nw.getDirectionTo(e));
+		assertEquals(Direction.UNDEFINED, nw.getDirectionTo(se));
+		assertEquals(Direction.UNDEFINED, nw.getDirectionTo(s));
+		assertEquals(Direction.UNDEFINED, nw.getDirectionTo(sw));
+		assertEquals(Direction.SOUTH, nw.getDirectionTo(w));
+		assertEquals(Direction.UNDEFINED, nw.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToN() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.WEST, n.getDirectionTo(nw));
+		assertEquals(Direction.UNDEFINED, n.getDirectionTo(n));
+		assertEquals(Direction.EAST, n.getDirectionTo(ne));
+		assertEquals(Direction.UNDEFINED, n.getDirectionTo(e));
+		assertEquals(Direction.UNDEFINED, n.getDirectionTo(se));
+		assertEquals(Direction.UNDEFINED, n.getDirectionTo(s));
+		assertEquals(Direction.UNDEFINED, n.getDirectionTo(sw));
+		assertEquals(Direction.UNDEFINED, n.getDirectionTo(w));
+		assertEquals(Direction.SOUTH, n.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToNE() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.UNDEFINED, ne.getDirectionTo(nw));
+		assertEquals(Direction.WEST, ne.getDirectionTo(n));
+		assertEquals(Direction.UNDEFINED, ne.getDirectionTo(ne));
+		assertEquals(Direction.SOUTH, ne.getDirectionTo(e));
+		assertEquals(Direction.UNDEFINED, ne.getDirectionTo(se));
+		assertEquals(Direction.UNDEFINED, ne.getDirectionTo(s));
+		assertEquals(Direction.UNDEFINED, ne.getDirectionTo(sw));
+		assertEquals(Direction.UNDEFINED, ne.getDirectionTo(w));
+		assertEquals(Direction.UNDEFINED, ne.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToE() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.UNDEFINED, e.getDirectionTo(nw));
+		assertEquals(Direction.UNDEFINED, e.getDirectionTo(n));
+		assertEquals(Direction.NORTH, e.getDirectionTo(ne));
+		assertEquals(Direction.UNDEFINED, e.getDirectionTo(e));
+		assertEquals(Direction.SOUTH, e.getDirectionTo(se));
+		assertEquals(Direction.UNDEFINED, e.getDirectionTo(s));
+		assertEquals(Direction.UNDEFINED, e.getDirectionTo(sw));
+		assertEquals(Direction.UNDEFINED, e.getDirectionTo(w));
+		assertEquals(Direction.WEST, e.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToSE() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.UNDEFINED, se.getDirectionTo(nw));
+		assertEquals(Direction.UNDEFINED, se.getDirectionTo(n));
+		assertEquals(Direction.UNDEFINED, se.getDirectionTo(ne));
+		assertEquals(Direction.NORTH, se.getDirectionTo(e));
+		assertEquals(Direction.UNDEFINED, se.getDirectionTo(se));
+		assertEquals(Direction.WEST, se.getDirectionTo(s));
+		assertEquals(Direction.UNDEFINED, se.getDirectionTo(sw));
+		assertEquals(Direction.UNDEFINED, se.getDirectionTo(w));
+		assertEquals(Direction.UNDEFINED, se.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToS() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.UNDEFINED, s.getDirectionTo(nw));
+		assertEquals(Direction.UNDEFINED, s.getDirectionTo(n));
+		assertEquals(Direction.UNDEFINED, s.getDirectionTo(ne));
+		assertEquals(Direction.UNDEFINED, s.getDirectionTo(e));
+		assertEquals(Direction.EAST, s.getDirectionTo(se));
+		assertEquals(Direction.UNDEFINED, s.getDirectionTo(s));
+		assertEquals(Direction.WEST, s.getDirectionTo(sw));
+		assertEquals(Direction.UNDEFINED, s.getDirectionTo(w));
+		assertEquals(Direction.NORTH, s.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToSW() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.UNDEFINED, sw.getDirectionTo(nw));
+		assertEquals(Direction.UNDEFINED, sw.getDirectionTo(n));
+		assertEquals(Direction.UNDEFINED, sw.getDirectionTo(ne));
+		assertEquals(Direction.UNDEFINED, sw.getDirectionTo(e));
+		assertEquals(Direction.UNDEFINED, sw.getDirectionTo(se));
+		assertEquals(Direction.EAST, sw.getDirectionTo(s));
+		assertEquals(Direction.UNDEFINED, sw.getDirectionTo(sw));
+		assertEquals(Direction.NORTH, sw.getDirectionTo(w));
+		assertEquals(Direction.UNDEFINED, sw.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToW() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.NORTH, w.getDirectionTo(nw));
+		assertEquals(Direction.UNDEFINED, w.getDirectionTo(n));
+		assertEquals(Direction.UNDEFINED, w.getDirectionTo(ne));
+		assertEquals(Direction.UNDEFINED, w.getDirectionTo(e));
+		assertEquals(Direction.UNDEFINED, w.getDirectionTo(se));
+		assertEquals(Direction.UNDEFINED, w.getDirectionTo(s));
+		assertEquals(Direction.SOUTH, w.getDirectionTo(sw));
+		assertEquals(Direction.UNDEFINED, w.getDirectionTo(w));
+		assertEquals(Direction.EAST, w.getDirectionTo(middle));
+	}
+	
+	@SmallTest
+	public void testGetDirectionToMiddle() {
+		Cell nw = new Cell(0, 0);
+		Cell n = new Cell(1, 0);
+		Cell ne = new Cell(2, 0);
+		Cell e = new Cell(2, 1);
+		Cell se = new Cell(2, 2);
+		Cell s = new Cell(1, 2);
+		Cell sw = new Cell(0, 2);
+		Cell w = new Cell(0, 1);
+		Cell middle = new Cell(1, 1);
+		assertEquals(Direction.UNDEFINED, middle.getDirectionTo(nw));
+		assertEquals(Direction.NORTH, middle.getDirectionTo(n));
+		assertEquals(Direction.UNDEFINED, middle.getDirectionTo(ne));
+		assertEquals(Direction.EAST, middle.getDirectionTo(e));
+		assertEquals(Direction.UNDEFINED, middle.getDirectionTo(se));
+		assertEquals(Direction.SOUTH, middle.getDirectionTo(s));
+		assertEquals(Direction.UNDEFINED, middle.getDirectionTo(sw));
+		assertEquals(Direction.WEST, middle.getDirectionTo(w));
+		assertEquals(Direction.UNDEFINED, middle.getDirectionTo(middle));
 	}
 	
 }
